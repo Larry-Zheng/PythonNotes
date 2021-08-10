@@ -972,5 +972,5 @@ cv2.destroyAllWindows()
 ##### mish实现方式
 
 + 用官方实现就行，不要将公式展开算，自己写没有优化的。
-+ <img src="D:\笔记\python\common_tricks.assets\image-20210527102536687.png" alt="image-20210527102536687" style="zoom:67%;" />
++ <img src="README.assets\image-20210527102536687.png" alt="image-20210527102536687" style="zoom:67%;" />
 
