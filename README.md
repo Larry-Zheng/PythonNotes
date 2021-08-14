@@ -936,6 +936,83 @@ if __name__ == '__main__':
   print(Chain().users('michael').repos)
   ```
 
+##### os判断文件，文件夹，扩展名
+
++ 尽量用os的函数，不要自己写诸如‘.py’ in xxx这种
+
+  ```python
+  [item for item in os.listdir() if os.path.isdir()]
+  [item for item in os.listdir() if os.path.isfile() and os.path.splitext(item)[1]=='.py']
+  
+  ```
+
+##### 贴标签，浅拷贝，深拷贝
+
++ 总则，**id是唯一数值标注，在对象生命周期内绝不会改变！**（is即是比较id，==是调用__ eq __，）
+
++ 对于可变对象
+
+  + = 相当于贴标签，id不会变，对于不可变对象也是一样，区别如下
+
+    ```python
+    In [1]: a = 1
+    
+    In [2]: id(a)
+    Out[2]: 1382265056
+    
+    In [3]: b=a
+    
+    In [4]: id(b)
+    Out[4]: 1382265056
+    
+    In [5]: a += 1
+    
+    In [6]: id(a)
+    Out[6]: 1382265088  #不能原地操作 只能撕掉标签重新开辟空间 重新贴
+    
+    In [7]: id(b)
+    Out[7]: 1382265056
+    
+        ############################
+    
+    In [8]: a = [1]
+    
+    In [9]: b = a
+    
+    In [10]: id(a),id(b)
+    Out[10]: (1382454589768, 1382454589768)
+    
+    In [11]: a.append(2)
+    
+    In [12]: id(a),id(b)
+    Out[12]: (1382454589768, 1382454589768)  #id没有改变 原地操作
+    
+    In [13]: a,b
+    Out[13]: ([1, 2], [1, 2])
+    ```
+
+  + [:],list()，copy.copy()，list.copy等相当于浅copy，对于numpy数组之类，[:]已经足够了
+
+    ```python
+    arr = [{'name': 'wcl', 'age': 23}, {'name': 'wjy', 'age': 14}]
+    arr2 = arr.copy()
+    del arr[1]
+    arr[0]['age'] = 18
+    print('arr', arr)
+    print('arr2', arr2)
+    ########输出#########
+    arr [{'name': 'wcl', 'age': 18}]
+    arr2 [{'name': 'wcl', 'age': 18}, {'name': 'wjy', 'age': 14}]
+    ```
+
+  + 如果列表里有列表，[:]和list只是做浅copy，列表中的列表仍然没有copy相当于贴标签。深拷贝需要copy.deepcopy()
+
+    
+
+  
+
+  
+
 
 
 # OpenCV
